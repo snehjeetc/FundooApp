@@ -73,7 +73,7 @@ export class SignupComponent implements OnInit {
       const control = formgroup.controls['password'];
       const matchingControl = formgroup.controls['confirmPassword'];
       if (matchingControl.errors && !matchingControl.errors?.mustMatch)
-        return
+        return;
       if (matchingControl.value !== control.value)
         matchingControl.setErrors({ mustMatch: true });
       else

@@ -16,6 +16,14 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { TakenoteComponent } from './components/takenote/takenote.component';
+import { DisplayComponent } from './components/display/display.component';
+import { MatCardModule } from '@angular/material/card';
+import { ClickOutsideModule } from 'ng-click-outside';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +31,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     LogoComponent,
     LoginComponent,
     SignupComponent,
-    DashboardComponent
+    DashboardComponent,
+    TakenoteComponent,
+    DisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +46,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatCardModule,
+    ClickOutsideModule
   ],
   providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
   ],
