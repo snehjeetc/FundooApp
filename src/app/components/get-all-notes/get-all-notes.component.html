@@ -1,2 +1,9 @@
-<app-takenote (sendEventToGetAllNotes)="messageReceived()"></app-takenote>
-<app-display [notesArray]="AllNotes"></app-display>
+<app-takenote
+  (sendEventToGetAllNotes)="messageReceived()"
+  [clicked]="clicked"
+></app-takenote>
+
+<app-display
+  [notesArray]="AllNotes"
+  (updateSignal)="refreshAfterUpdation($event)"
+></app-display>

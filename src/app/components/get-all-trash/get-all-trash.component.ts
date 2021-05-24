@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UserService } from 'src/app/services/userService/user.service';
+
 @Component({
   selector: 'app-get-all-trash',
   templateUrl: './get-all-trash.component.html',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GetAllTrashComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userservice: UserService) { }
 
   ngOnInit(): void {
+  }
+
+  getAllTrash() {
+
   }
 
 }

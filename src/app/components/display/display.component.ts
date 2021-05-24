@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/userService/user.service';
+import { UpdateNoteComponent } from '../update-note/update-note.component';
 
 @Component({
   selector: 'app-display',
@@ -10,11 +12,26 @@ export class DisplayComponent implements OnInit {
 
 
   @Input() notesArray: any[]
-  constructor(private userservice: UserService) {
+  @Output() updateSignal = new EventEmitter<string>();
+
+  constructor(private userservice: UserService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     console.log(this.notesArray);
+  }
+
+
+  openDialog(note: any) {
+    let dialogRef = this.dialog.open(UpdateNoteComponent, {
+      width: '500px',
+      data: { note }
+    });
+    dialogRef.afterClosed().subscribe((resp: any) => {
+      if (resp.success)
+        this.updateSignal.emit('updated');
+    })
   }
 
 }

@@ -23,6 +23,13 @@ import { TakenoteComponent } from './components/takenote/takenote.component';
 import { DisplayComponent } from './components/display/display.component';
 import { MatCardModule } from '@angular/material/card';
 import { ClickOutsideModule } from 'ng-click-outside';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { GetAllNotesComponent } from './components/get-all-notes/get-all-notes.component';
+import { IconsComponent } from './components/icons/icons.component';
+import { GetAllTrashComponent } from './components/get-all-trash/get-all-trash.component';
+import { GetAllArchivesComponent } from './components/get-all-archives/get-all-archives.component';
+import { UpdateNoteComponent } from './components/update-note/update-note.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -33,7 +40,12 @@ import { ClickOutsideModule } from 'ng-click-outside';
     SignupComponent,
     DashboardComponent,
     TakenoteComponent,
-    DisplayComponent
+    DisplayComponent,
+    GetAllNotesComponent,
+    IconsComponent,
+    GetAllTrashComponent,
+    GetAllArchivesComponent,
+    UpdateNoteComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +63,9 @@ import { ClickOutsideModule } from 'ng-click-outside';
     MatToolbarModule,
     MatListModule,
     MatCardModule,
-    ClickOutsideModule
+    ClickOutsideModule,
+    MatExpansionModule,
+    MatDialogModule
   ],
   providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
   ],

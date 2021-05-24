@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/userService/user.service';
+import { NoteService } from 'src/app/services/noteService/note.service';
 
 @Component({
   selector: 'app-get-all-notes',
@@ -9,7 +9,9 @@ import { UserService } from 'src/app/services/userService/user.service';
 export class GetAllNotesComponent implements OnInit {
 
   AllNotes: any[];
-  constructor(private userservice: UserService) { }
+  constructor(private noteservice: NoteService) { }
+
+  clicked = false;
 
   ngOnInit(): void {
     this.getAllNotes();
@@ -17,7 +19,7 @@ export class GetAllNotesComponent implements OnInit {
 
   getAllNotes() {
 
-    this.userservice.getAllNotes().subscribe((resp: any) => {
+    this.noteservice.getAllNotes().subscribe((resp: any) => {
       console.log(resp.data.data);
       this.AllNotes = resp.data.data;
     }, (error) => {
@@ -28,6 +30,16 @@ export class GetAllNotesComponent implements OnInit {
   messageReceived() {
     console.log("Event called from take note");
     this.getAllNotes();
+  }
+
+  refreshAfterUpdation(event) {
+    if (event === 'update') {
+      console.log('refreshed');
+      this.getAllNotes();
+    }
+    else {
+      console.log("update failure");
+    }
   }
 
 }

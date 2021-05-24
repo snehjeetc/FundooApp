@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DisplayComponent } from './components/display/display.component';
+import { GetAllNotesComponent } from './components/get-all-notes/get-all-notes.component';
+import { GetAllTrashComponent } from './components/get-all-trash/get-all-trash.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { TakenoteComponent } from './components/takenote/takenote.component';
@@ -26,8 +28,8 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       { path: "", redirectTo: "notes", pathMatch: "full" },
-      { path: "takenote", component: TakenoteComponent },
-      { path: "notes", component: DisplayComponent }
+      { path: "notes", component: GetAllNotesComponent },
+      { path: "trash", component: GetAllTrashComponent }
     ]
   }
 ];

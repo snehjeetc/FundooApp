@@ -1,6 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-
-import { UserService } from 'src/app/services/userService/user.service';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { NoteService } from 'src/app/services/noteService/note.service';
 
 
 @Component({
@@ -13,27 +12,24 @@ export class TakenoteComponent implements OnInit {
   public title: string;
   public description: string;
 
+  @Input() clicked: boolean;
   @Output() sendEventToGetAllNotes = new EventEmitter<string>();
 
-  constructor(private userservice: UserService) { }
+  @ViewChild('createCard') card: ElementRef;
+
+  constructor(private noteservice: NoteService,
+    private renderer: Renderer2) {
+    this.renderer.listen('window', 'click', (e: Event) => {
+      if (e.target === this.card.nativeElement) {
+        console.log("Outside");
+        console.log(this.card);
+        this.clicked = false;
+      }
+    })
+  }
 
   ngOnInit(): void {
   }
-
-  clicked = false;
-  // step = 0;
-
-  // setStep(index: number) {
-  //   this.step = index;
-  // }
-
-  // nextStep() {
-  //   this.step++;
-  // }
-
-  // prevStep() {
-  //   this.step--;
-  // }
 
   createNote() {
     this.clicked = !this.clicked;
@@ -41,12 +37,16 @@ export class TakenoteComponent implements OnInit {
       title: this.title,
       description: this.description
     }
-    this.userservice.createNote(obj).subscribe((resp: any) => {
+    this.noteservice.createNote(obj).subscribe((resp: any) => {
       console.log(resp);
       this.sendEventToGetAllNotes.emit();
     }, (error) => {
       console.log(error);
     })
+  }
+
+  insideCard() {
+    this.clicked = true;
   }
 
 }

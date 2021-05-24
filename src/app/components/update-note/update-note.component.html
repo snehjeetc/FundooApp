@@ -1,0 +1,64 @@
+<div
+  class="mainContainer"
+  fxLayout="column"
+  fxLayoutAlign="space-between stretch"
+>
+  <div
+    class="updateHeader"
+    fxFlex="10"
+    fxLayout="row"
+    fxLayoutAlign="space-between stretch"
+  >
+    <div class="img-logo" fxFlex="5%">
+      <img
+        src="../../../assets/icons/PngItem_792312.png"
+        alt="edit"
+        class="logo"
+        width="25px"
+        height="25px"
+      />
+    </div>
+
+    <header class="container-header" fxFlex="80%">
+      <h2>Update Note</h2>
+    </header>
+
+    <div class="close-button" fxFlex="10%">
+      <mat-icon aria-hidden="false" class="form-head-icon" (click)="onClose()"
+        >close</mat-icon
+      >
+    </div>
+  </div>
+
+  <div
+    class="input-container"
+    fxFlex="95%"
+    fxLayout="column"
+    fxLayoutAlign="space-between stretch"
+  >
+    <header class="title" fxFlex="15%">
+      <mat-form-field class="example-full-width">
+        <mat-label>Title</mat-label>
+        <input matInput class="title-bold" />
+      </mat-form-field>
+    </header>
+
+    <div class="description" fxFlex="70%">
+      <mat-form-field class="example-full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </div>
+
+    <div
+      class="buttons"
+      fxFlex="15%"
+      fxLayout="column"
+      fxLayoutAlign="center end"
+    >
+      <button type="submit" mat-raised-button color="bluish" (click)="submit()">
+        Done
+      </button>
+    </div>
+  </div>
+</div>
