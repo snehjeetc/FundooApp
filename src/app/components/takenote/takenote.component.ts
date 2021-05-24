@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
+import { UserService } from 'src/app/services/userService/user.service';
 
 
 @Component({
@@ -8,15 +10,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TakenoteComponent implements OnInit {
 
-  clicked = false;
-  constructor() { }
+  public title: string;
+  public description: string;
+
+  @Output() sendEventToGetAllNotes = new EventEmitter<string>();
+
+  constructor(private userservice: UserService) { }
 
   ngOnInit(): void {
   }
 
-  onClickOutside(event: Event) {
-    console.log("Outside event", this.clicked)
-    if (this.clicked)
-      this.clicked = !this.clicked;
+  clicked = false;
+  // step = 0;
+
+  // setStep(index: number) {
+  //   this.step = index;
+  // }
+
+  // nextStep() {
+  //   this.step++;
+  // }
+
+  // prevStep() {
+  //   this.step--;
+  // }
+
+  createNote() {
+    this.clicked = !this.clicked;
+    let obj = {
+      title: this.title,
+      description: this.description
+    }
+    this.userservice.createNote(obj).subscribe((resp: any) => {
+      console.log(resp);
+      this.sendEventToGetAllNotes.emit();
+    }, (error) => {
+      console.log(error);
+    })
   }
+
 }

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/userService/user.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private userservice: UserService,
-    private _snackbar: MatSnackBar) {
+    private _snackbar: MatSnackBar,
+    private router: Router) {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -42,9 +44,11 @@ export class LoginComponent implements OnInit {
         password: this.form.value.password
       }
       this.userservice.loginToFundoo(obj).subscribe((resp: any) => {
-        console.log(resp);
+        // localStorage.setItem('id', resp.userId);
+        localStorage.setItem('token', resp.id);
+        this.router.navigate(['home']);
       }, (httperror: HttpErrorResponse) => {
-        if (httperror.error.error.code == 'LOGIN_FAILED') {
+        if (httperror.error.error.statusCode === 401) {
           console.log("Login failed");
           let snackbar = this._snackbar.open(httperror.error.error.message, 'Retry');
           snackbar.afterDismissed().subscribe(() => {

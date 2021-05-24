@@ -1,4 +1,38 @@
 <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 15px">
+  <!-- <mat-accordion class="example-headers-align">
+    <mat-expansion-panel
+      [expanded]="step === 0"
+      (opened)="setStep(0)"
+      hideToggle
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title *ngIf="!clicked"> Take a note... </mat-panel-title>
+        <img
+          src="../../../assets/icons/PngItem_792312.png"
+          alt="logo"
+          width="30px"
+          height="30px"
+          style="background: #fff"
+        />
+      </mat-expansion-panel-header>
+
+      <form action="">
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput type="text" [(ngModel)]="title" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <input matInput type="text" [(ngModel)]="description" />
+        </mat-form-field>
+        <mat-action-row>
+          <button mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion> -->
+
   <mat-card
     class="mat-elevation-z5 outline take-note-card"
     *ngIf="!clicked"
@@ -24,18 +58,27 @@
     *ngIf="clicked"
     class="mat-elevation-z5 outline take-note-card"
     fxLayout="column"
-    (clickOutside)="onClickOutside($event)"
   >
-    <form fxLayout="column">
+    <div fxLayout="column">
       <mat-form-field>
         <mat-label>Title</mat-label>
-        <input type="text" matInput placeholder="Title" />
+        <input type="text" matInput placeholder="Title" [(ngModel)]="title" />
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Description</mat-label>
-        <input type="text" matInput placeholder="Description" />
+        <input
+          type="text"
+          matInput
+          placeholder="Description"
+          [(ngModel)]="description"
+        />
       </mat-form-field>
-    </form>
+
+      <div>
+        <app-icons></app-icons>
+        <button type="button" (click)="createNote()">Close</button>
+      </div>
+    </div>
   </mat-card>
 </div>
