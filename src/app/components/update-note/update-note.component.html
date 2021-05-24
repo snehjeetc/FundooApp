@@ -39,14 +39,14 @@
     <header class="title" fxFlex="15%">
       <mat-form-field class="example-full-width">
         <mat-label>Title</mat-label>
-        <input matInput class="title-bold" />
+        <input matInput [(ngModel)]="title" />
       </mat-form-field>
     </header>
 
     <div class="description" fxFlex="70%">
       <mat-form-field class="example-full-width">
         <mat-label>Description</mat-label>
-        <textarea matInput></textarea>
+        <textarea matInput [(ngModel)]="description"></textarea>
       </mat-form-field>
     </div>
 
