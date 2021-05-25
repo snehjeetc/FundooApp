@@ -36,7 +36,10 @@
 
           <div class="icons" fxFlex="25%">
             <!-- action button -->
-            <app-icons [noteCard]="note"></app-icons>
+            <app-icons
+              [noteCard]="note"
+              (refreshRequest)="refreshRequestRecieved($event)"
+            ></app-icons>
           </div>
         </div>
       </mat-card>

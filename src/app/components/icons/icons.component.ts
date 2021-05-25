@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NoteService } from 'src/app/services/noteService/note.service';
 
 @Component({
   selector: 'app-icons',
@@ -26,13 +27,36 @@ export class IconsComponent implements OnInit {
   ]
 
   @Input() noteCard: any;
-  constructor() { }
+  @Output() refreshRequest = new EventEmitter<any>();
+  constructor(private noteService: NoteService) { }
 
   ngOnInit(): void {
   }
 
   archiveNote() {
-    console.log(this.noteCard.id);
+    let data = {
+      noteIdList: this.noteCard.id,
+      isArchived: true
+    };
+    this.noteService.addToArchive(data).subscribe((response: any) => {
+      console.log(response);
+      this.refreshRequest.emit({ refresh: true, message: 'archived' });
+    }, (error) => {
+      console.log(error);
+    })
+  }
+
+  deleteNote() {
+    let data = {
+      noteIdList: this.noteCard.id,
+      isDeleted: true
+    };
+    this.noteService.addToTrash(data).subscribe((response: any) => {
+      console.log(response);
+      this.refreshRequest.emit({ refresh: true, message: 'deleted' });
+    }, (error) => {
+      console.log(error);
+    })
   }
 
 }

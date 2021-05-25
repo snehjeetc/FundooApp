@@ -40,4 +40,12 @@ export class DisplayComponent implements OnInit {
     })
   }
 
+  refreshRequestRecieved(event) {
+    if (event) {
+      if (event.refresh) {
+        this.updateSignal.emit('updated');
+      }
+    }
+  }
+
 }
