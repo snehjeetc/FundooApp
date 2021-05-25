@@ -21,7 +21,7 @@ export class GetAllNotesComponent implements OnInit {
 
     this.noteservice.getAllNotes().subscribe((resp: any) => {
       console.log(resp.data.data);
-      this.AllNotes = resp.data.data;
+      this.AllNotes = resp.data.data.filter(this.noteFilteration);
     }, (error) => {
       console.log(error);
     });
@@ -48,6 +48,10 @@ export class GetAllNotesComponent implements OnInit {
 
   catchClickEvents(event) {
     this.clicked = event;
+  }
+
+  private noteFilteration(note): boolean {
+    return note.isArchived == false && note.isDeleted == false;
   }
 
 }

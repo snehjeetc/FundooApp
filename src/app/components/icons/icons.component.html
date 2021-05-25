@@ -61,6 +61,7 @@
       alt="archive"
       width="25px"
       height="25px"
+      (click)="archiveNote()"
     />
   </div>
 
@@ -74,7 +75,7 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="deleteNote()">
         <mat-icon>delete</mat-icon>
         <span>Delete</span>
       </button>
@@ -86,3 +87,5 @@
     </mat-menu>
   </div>
 </div>
+
+<!-- 1.) Change event when the color is changed, change the background color of the mat-card in the display component-->
