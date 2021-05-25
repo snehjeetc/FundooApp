@@ -1,6 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { Component, Inject, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NoteService } from 'src/app/services/noteService/note.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-update-note',
@@ -12,9 +14,12 @@ export class UpdateNoteComponent implements OnInit {
   title: string;
   description: string;
 
+  @ViewChild('autosize') autosize: CdkTextareaAutosize;
+
   constructor(private dialogRef: MatDialogRef<UpdateNoteComponent>,
     @Inject(MAT_DIALOG_DATA) public card: any,
-    private noteservice: NoteService) {
+    private noteservice: NoteService,
+    private _ngZone: NgZone) {
 
   }
 
@@ -40,6 +45,14 @@ export class UpdateNoteComponent implements OnInit {
     }, (error) => {
       console.log(error);
     });
+  }
+
+
+
+  triggerResize() {
+    // Wait for changes to be applied, then trigger textarea resize.
+    this._ngZone.onStable.pipe(take(1))
+      .subscribe(() => this.autosize.resizeToFitContent(true));
   }
 
 }

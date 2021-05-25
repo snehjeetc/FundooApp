@@ -25,12 +25,18 @@ export class DisplayComponent implements OnInit {
 
   openDialog(note: any) {
     let dialogRef = this.dialog.open(UpdateNoteComponent, {
-      width: '500px',
-      data: { note }
+      minHeight: '200px',
+      maxHeight: '600px',
+      minWidth: '40%',
+      maxWidth: '60%',
+      data: { note },
+      panelClass: 'custom-dialog-container'
     });
     dialogRef.afterClosed().subscribe((resp: any) => {
-      if (resp.success)
-        this.updateSignal.emit('updated');
+      if (resp) {
+        if (resp.success)
+          this.updateSignal.emit('updated');
+      }
     })
   }
 

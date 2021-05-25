@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { NoteService } from 'src/app/services/noteService/note.service';
 
 
@@ -7,13 +7,14 @@ import { NoteService } from 'src/app/services/noteService/note.service';
   templateUrl: './takenote.component.html',
   styleUrls: ['./takenote.component.scss']
 })
-export class TakenoteComponent implements OnInit {
+export class TakenoteComponent implements OnInit, OnChanges {
 
   public title: string;
   public description: string;
 
   @Input() clicked: boolean;
   @Output() sendEventToGetAllNotes = new EventEmitter<string>();
+  @Output() sendClickingEvent = new EventEmitter<boolean>();
 
   @ViewChild('createCard') card: ElementRef;
 
@@ -24,8 +25,14 @@ export class TakenoteComponent implements OnInit {
         console.log("Outside");
         console.log(this.card);
         this.clicked = false;
+        this.sendClickingEvent.emit(this.clicked);
       }
     })
+  }
+
+  ngOnChanges(changes: { [property: string]: SimpleChange }): void {
+    let change: SimpleChange = changes['clicked'];
+    this.clicked = change.currentValue;
   }
 
   ngOnInit(): void {
@@ -45,8 +52,8 @@ export class TakenoteComponent implements OnInit {
     })
   }
 
-  insideCard() {
-    this.clicked = true;
+  onClick() {
+    this.clicked = !this.clicked;
+    this.sendClickingEvent.emit(this.clicked);
   }
-
 }

@@ -30,6 +30,8 @@ import { GetAllTrashComponent } from './components/get-all-trash/get-all-trash.c
 import { GetAllArchivesComponent } from './components/get-all-archives/get-all-archives.component';
 import { UpdateNoteComponent } from './components/update-note/update-note.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -65,7 +67,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCardModule,
     ClickOutsideModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule,
+    MatTooltipModule
   ],
   providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
   ],

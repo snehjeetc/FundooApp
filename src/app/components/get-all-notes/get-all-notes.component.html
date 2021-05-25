@@ -1,9 +1,11 @@
 <app-takenote
   (sendEventToGetAllNotes)="messageReceived()"
   [clicked]="clicked"
+  (sendClickingEvent)="catchClickEvents($event)"
 ></app-takenote>
 
 <app-display
   [notesArray]="AllNotes"
   (updateSignal)="refreshAfterUpdation($event)"
+  (click)="collapseTakeNote()"
 ></app-display>

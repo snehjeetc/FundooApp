@@ -4,7 +4,7 @@
   fxLayoutAlign="space-between center"
   fxLayoutGap="20px grid"
 >
-  <div fxFlex="25%">
+  <div fxFlex="20%">
     <!-- remainder  -->
     <img
       src="../../../assets/card-icons/alert.svg"
@@ -14,7 +14,7 @@
     />
   </div>
 
-  <div fxFlex="25%">
+  <div fxFlex="20%">
     <!-- collaborator -->
     <img
       src="../../../assets/card-icons/collaborator.svg"
@@ -24,17 +24,37 @@
     />
   </div>
 
-  <div fxFlex="25%">
+  <div fxFlex="20%" #tooltip="matTooltip" matTooltip="Change Color">
     <!-- color pallete -->
     <img
       src="../../../assets/card-icons/color_lens.svg"
       alt="color"
       width="25px"
       height="25px"
+      [matMenuTriggerFor]="colorMenu"
     />
+    <mat-menu
+      #colorMenu="matMenu"
+      yPosition="above"
+      xPosition="after"
+      [overlapTrigger]="false"
+    >
+      <div
+        *ngFor="let arrayOfColors of colorPalette"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+      >
+        <div *ngFor="let backcolor of arrayOfColors">
+          <div
+            [ngStyle]="{ 'background-color': backcolor.color }"
+            class="circle"
+          ></div>
+        </div>
+      </div>
+    </mat-menu>
   </div>
 
-  <div fxFlex="25%">
+  <div fxFlex="20%">
     <!-- Archive -->
     <img
       src="../../../assets/icons/archive.svg"
@@ -46,5 +66,23 @@
 
   <div>
     <!-- more options -->
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+
+      <button mat-menu-item>
+        <mat-icon>label</mat-icon>
+        <span>Add Label</span>
+      </button>
+    </mat-menu>
   </div>
 </div>

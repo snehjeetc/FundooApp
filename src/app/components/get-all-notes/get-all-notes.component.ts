@@ -33,13 +33,21 @@ export class GetAllNotesComponent implements OnInit {
   }
 
   refreshAfterUpdation(event) {
-    if (event === 'update') {
+    if (event === 'updated') {
       console.log('refreshed');
       this.getAllNotes();
     }
     else {
       console.log("update failure");
     }
+  }
+
+  collapseTakeNote() {
+    this.clicked = false;
+  }
+
+  catchClickEvents(event) {
+    this.clicked = event;
   }
 
 }

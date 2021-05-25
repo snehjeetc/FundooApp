@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GetAllArchivesComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  archive() {
+    // let data = {
+    //   // cardidList:this.cardId,
+    //   noteIdList: [this.card.id],
+    //   isArchived: this.isArchived,
+    // }
   }
 
 }
